@@ -282,8 +282,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -790,6 +790,7 @@ GameObject:
   - component: {fileID: 1043504543}
   - component: {fileID: 1043504545}
   - component: {fileID: 1043504544}
+  - component: {fileID: 1043504546}
   m_Layer: 5
   m_Name: SubtitleText
   m_TagString: Untagged
@@ -845,8 +846,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -915,6 +916,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1043504542}
   m_CullTransparentMesh: 1
+--- !u!114 &1043504546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043504542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1155f3de646b74db9df06b3c803c40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TitleTextCycler
+  targetText: {fileID: 1043504544}
+  changeInterval: 2
+  messages:
+  - Tell us what you're looking for
+  - Where would you love to go?
+  - Let us help you discover your next trip
 --- !u!1 &1115154068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1163,7 +1182,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -1634,7 +1653,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8274511, g: 0.8274511, b: 0.8274511, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2015,7 +2034,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -2184,27 +2203,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6028764998963319938, guid: c79ba32be1f17934399bc9f2764878a9, type: 3}
       propertyPath: m_Options.m_Options.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6028764998963319938, guid: c79ba32be1f17934399bc9f2764878a9, type: 3}
       propertyPath: m_Options.m_Options.Array.data[0].m_Text
-      value: Under $100
+      value: Select budget
       objectReference: {fileID: 0}
     - target: {fileID: 6028764998963319938, guid: c79ba32be1f17934399bc9f2764878a9, type: 3}
       propertyPath: m_Options.m_Options.Array.data[1].m_Text
-      value: $100 - $300
+      value: Under $100
       objectReference: {fileID: 0}
     - target: {fileID: 6028764998963319938, guid: c79ba32be1f17934399bc9f2764878a9, type: 3}
       propertyPath: m_Options.m_Options.Array.data[2].m_Text
-      value: $300 - $700
+      value: $100 - $300
       objectReference: {fileID: 0}
     - target: {fileID: 6028764998963319938, guid: c79ba32be1f17934399bc9f2764878a9, type: 3}
       propertyPath: m_Options.m_Options.Array.data[3].m_Text
-      value: $700 +
+      value: $300 - $700
       objectReference: {fileID: 0}
     - target: {fileID: 6028764998963319938, guid: c79ba32be1f17934399bc9f2764878a9, type: 3}
       propertyPath: m_Options.m_Options.Array.data[4].m_Text
-      value: Select Budget
+      value: $700 +
       objectReference: {fileID: 0}
     - target: {fileID: 6028764998963319938, guid: c79ba32be1f17934399bc9f2764878a9, type: 3}
       propertyPath: m_Options.m_Options.Array.data[4].m_Color.a
@@ -2238,9 +2257,29 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7091098247086012722, guid: c79ba32be1f17934399bc9f2764878a9, type: 3}
+      propertyPath: m_fontSize
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7091098247086012722, guid: c79ba32be1f17934399bc9f2764878a9, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 35
+      objectReference: {fileID: 0}
     - target: {fileID: 7527097214856522008, guid: c79ba32be1f17934399bc9f2764878a9, type: 3}
       propertyPath: m_text
-      value: Select Budget
+      value: Select budget
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527097214856522008, guid: c79ba32be1f17934399bc9f2764878a9, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527097214856522008, guid: c79ba32be1f17934399bc9f2764878a9, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527097214856522008, guid: c79ba32be1f17934399bc9f2764878a9, type: 3}
+      propertyPath: m_isRightToLeft
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2367,9 +2406,73 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3947156087242081630, guid: e74bf32538fd947439ac86b8d8959670, type: 3}
+      propertyPath: m_text
+      value: Select trip
+      objectReference: {fileID: 0}
+    - target: {fileID: 3947156087242081630, guid: e74bf32538fd947439ac86b8d8959670, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3947156087242081630, guid: e74bf32538fd947439ac86b8d8959670, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 6650439693012292047, guid: e74bf32538fd947439ac86b8d8959670, type: 3}
       propertyPath: m_Name
       value: Trip Vibe
+      objectReference: {fileID: 0}
+    - target: {fileID: 8818306520573795963, guid: e74bf32538fd947439ac86b8d8959670, type: 3}
+      propertyPath: m_Options.m_Options.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8818306520573795963, guid: e74bf32538fd947439ac86b8d8959670, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[0].m_Text
+      value: Select trip
+      objectReference: {fileID: 0}
+    - target: {fileID: 8818306520573795963, guid: e74bf32538fd947439ac86b8d8959670, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[1].m_Text
+      value: "\U0001F33F Nature"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8818306520573795963, guid: e74bf32538fd947439ac86b8d8959670, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[2].m_Text
+      value: "\U0001F9D7 Adventure"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8818306520573795963, guid: e74bf32538fd947439ac86b8d8959670, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[3].m_Text
+      value: "\U0001F6C0 Relaxing"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8818306520573795963, guid: e74bf32538fd947439ac86b8d8959670, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[4].m_Text
+      value: "\U0001F354 Foodie"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8818306520573795963, guid: e74bf32538fd947439ac86b8d8959670, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[5].m_Text
+      value: "\U0001F306 City"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8818306520573795963, guid: e74bf32538fd947439ac86b8d8959670, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[5].m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8818306520573795963, guid: e74bf32538fd947439ac86b8d8959670, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[5].m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8818306520573795963, guid: e74bf32538fd947439ac86b8d8959670, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[5].m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8818306520573795963, guid: e74bf32538fd947439ac86b8d8959670, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[5].m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027403143344106481, guid: e74bf32538fd947439ac86b8d8959670, type: 3}
+      propertyPath: m_fontSize
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027403143344106481, guid: e74bf32538fd947439ac86b8d8959670, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2384,6 +2487,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 952880779}
     m_Modifications:
+    - target: {fileID: 888386799855744504, guid: fe5298efa09d7b349ad59e95670b9628, type: 3}
+      propertyPath: m_fontSize
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 888386799855744504, guid: fe5298efa09d7b349ad59e95670b9628, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 35
+      objectReference: {fileID: 0}
     - target: {fileID: 1782139539194198666, guid: fe5298efa09d7b349ad59e95670b9628, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2464,6 +2575,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5665344576599488689, guid: fe5298efa09d7b349ad59e95670b9628, type: 3}
+      propertyPath: m_Options.m_Options.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5665344576599488689, guid: fe5298efa09d7b349ad59e95670b9628, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[0].m_Text
+      value: Select distance
+      objectReference: {fileID: 0}
+    - target: {fileID: 5665344576599488689, guid: fe5298efa09d7b349ad59e95670b9628, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[1].m_Text
+      value: Nearby (< 50 km)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5665344576599488689, guid: fe5298efa09d7b349ad59e95670b9628, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[2].m_Text
+      value: "Weekend trip (50 \u2013 300 km)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5665344576599488689, guid: fe5298efa09d7b349ad59e95670b9628, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[3].m_Text
+      value: "Far (300 \u2013 1000 km)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5665344576599488689, guid: fe5298efa09d7b349ad59e95670b9628, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[4].m_Text
+      value: Very far (1000+ km)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5665344576599488689, guid: fe5298efa09d7b349ad59e95670b9628, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[4].m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5665344576599488689, guid: fe5298efa09d7b349ad59e95670b9628, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[4].m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5665344576599488689, guid: fe5298efa09d7b349ad59e95670b9628, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[4].m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5665344576599488689, guid: fe5298efa09d7b349ad59e95670b9628, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[4].m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6937756338212789482, guid: fe5298efa09d7b349ad59e95670b9628, type: 3}
       propertyPath: m_Name
       value: MaxDistance
@@ -2486,7 +2637,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8656951888905704194, guid: fe5298efa09d7b349ad59e95670b9628, type: 3}
       propertyPath: m_text
-      value: Nearby (< 50 km)
+      value: Select distance
+      objectReference: {fileID: 0}
+    - target: {fileID: 8656951888905704194, guid: fe5298efa09d7b349ad59e95670b9628, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8656951888905704194, guid: fe5298efa09d7b349ad59e95670b9628, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8656951888905704194, guid: fe5298efa09d7b349ad59e95670b9628, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
