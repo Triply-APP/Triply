@@ -20,7 +20,8 @@ public class TripCriteriaManager : MonoBehaviour
 {
     public static TripCriteriaManager Instance { get; private set; }
 
-    public TripPlan CurrentTripPlan;
+    // Auto-property: Unity will NOT show this in the Inspector
+    public TripPlan CurrentTripPlan { get; set; }
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class TripCriteriaManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }

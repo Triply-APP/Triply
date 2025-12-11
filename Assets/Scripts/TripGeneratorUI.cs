@@ -6,11 +6,10 @@ using Firebase.Firestore;
 
 public class TripGeneratorUI : MonoBehaviour
 {
-    [Header("Inputs")]
-    public TMP_InputField startingLocationInput;    // Your "Starting Location" field
-    public TMP_Dropdown budgetDropdown;            // Budget selector
-    public TMP_Dropdown distanceDropdown;          // Distance selector
-    public TMP_Dropdown vibeDropdown;              // Vibe selector
+    public TMP_InputField startingLocationInput;
+    public TMP_Dropdown budgetDropdown;
+    public TMP_Dropdown distanceDropdown;
+    public TMP_Dropdown vibeDropdown;
 
     private FirebaseFirestore db;
 
@@ -19,28 +18,34 @@ public class TripGeneratorUI : MonoBehaviour
         db = FirebaseFirestore.DefaultInstance;
     }
 
-    // Hook this to your "Generate Trip" button OnClick
+    // Called by the Generate Trip button
     public void OnGenerateTripClicked()
     {
         string startingLocation = startingLocationInput != null
             ? startingLocationInput.text.Trim()
             : "";
 
-        Debug.Log("Starting location: " + startingLocation);
+        Debug.Log("[TripGeneratorUI] Starting location: " + startingLocation);
 
+        // ✅ Do NOT load the scene here
         GenerateTripAsync();
     }
 
+    // Does Firestore work, then loads TripResultsScene
     private async void GenerateTripAsync()
     {
-        // 1. Convert dropdown selections → Firestore keys
-        string budgetKey = GetBudgetKey(budgetDropdown.value);
+        if (TripCriteriaManager.Instance == null)
+        {
+            Debug.LogError("[TripGeneratorUI] TripCriteriaManager.Instance is NULL!");
+            return;
+        }
+
+        string budgetKey   = GetBudgetKey(budgetDropdown.value);
         string distanceKey = GetDistanceKey(distanceDropdown.value);
-        string vibeKey = GetVibeKey(vibeDropdown.value);
+        string vibeKey     = GetVibeKey(vibeDropdown.value);
 
-        Debug.Log($"Querying Firestore with budget={budgetKey}, distance={distanceKey}, vibe={vibeKey}");
+        Debug.Log($"[TripGeneratorUI] Querying with budget={budgetKey}, distance={distanceKey}, vibe={vibeKey}");
 
-        // 2. Build Firestore query
         Query query = db.Collection("tripTemplates")
             .WhereEqualTo("budgetKey", budgetKey)
             .WhereEqualTo("distanceKey", distanceKey)
@@ -53,66 +58,42 @@ public class TripGeneratorUI : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            Debug.LogError("Firestore query failed: " + e.Message);
+            Debug.LogError("[TripGeneratorUI] Firestore query failed: " + e.Message);
             return;
         }
 
-        var docs = snapshot.Documents.ToList();  // Convert IEnumerable → List
+        var docs = snapshot.Documents.ToList();
+        Debug.Log("[TripGeneratorUI] Docs found: " + docs.Count);
 
         if (docs.Count == 0)
         {
-            Debug.LogWarning("No trips found for selected criteria.");
+            Debug.LogWarning("[TripGeneratorUI] No trips found for selected criteria.");
             return;
         }
 
-        // 3. Pick a random document
-        int index = Random.Range(0, docs.Count);
-        DocumentSnapshot chosen = docs[index];
+        // Pick random trip
+        var chosen = docs[Random.Range(0, docs.Count)];
         var data = chosen.ToDictionary();
 
-        // 4. Build TripPlan from document fields
         TripPlan plan = new TripPlan
         {
-            destination = data.ContainsKey("destination") ? data["destination"].ToString() : "Unknown destination",
-            distance    = data.ContainsKey("distance")    ? data["distance"].ToString()    : "",
-
-            morning = new TimeBlock
-            {
-                description = data.ContainsKey("morningDescription")
-                    ? data["morningDescription"].ToString()
-                    : ""
-            },
-            afternoon = new TimeBlock
-            {
-                description = data.ContainsKey("afternoonDescription")
-                    ? data["afternoonDescription"].ToString()
-                    : ""
-            },
-            evening = new TimeBlock
-            {
-                description = data.ContainsKey("eveningDescription")
-                    ? data["eveningDescription"].ToString()
-                    : ""
-            }
+            destination = data["destination"].ToString(),
+            distance    = data["distance"].ToString(),
+            morning  = new TimeBlock { description = data["morningDescription"].ToString() },
+            afternoon= new TimeBlock { description = data["afternoonDescription"].ToString() },
+            evening  = new TimeBlock { description = data["eveningDescription"].ToString() }
         };
 
-        if (TripCriteriaManager.Instance == null)
-        {
-            Debug.LogError("TripCriteriaManager.Instance is null. Make sure it exists in an earlier scene.");
-            return;
-        }
-
-        // 5. Store result globally and go to TripResultsScene
         TripCriteriaManager.Instance.CurrentTripPlan = plan;
 
-        SceneManager.LoadScene("TripResultsScene");
-    }
+        Debug.Log("[TripGeneratorUI] TripPlan set – loading TripResultsScene");
 
-    // 🔻 These assume your dropdown options are ordered (0,1,2). Adjust if needed.
+        // ✅ Load the scene ONLY AFTER we have a plan
+        SceneManager.LoadScene("TripResultsScene");   // make sure name matches your scene
+    }
 
     private string GetBudgetKey(int index)
     {
-        // index 0 = Low, 1 = Medium, 2 = High
         switch (index)
         {
             case 0: return "low";
@@ -124,7 +105,6 @@ public class TripGeneratorUI : MonoBehaviour
 
     private string GetDistanceKey(int index)
     {
-        // index 0 = Nearby, 1 = Day Trip, 2 = Far
         switch (index)
         {
             case 0: return "near";
@@ -136,7 +116,6 @@ public class TripGeneratorUI : MonoBehaviour
 
     private string GetVibeKey(int index)
     {
-        // index 0 = Nature, 1 = Food/City, 2 = Culture
         switch (index)
         {
             case 0: return "nature";
