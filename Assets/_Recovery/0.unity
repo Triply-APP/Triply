@@ -675,7 +675,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 732.53, y: -493}
+  m_AnchoredPosition: {x: 700.91486, y: -423.8307}
   m_SizeDelta: {x: 1081.3755, y: 185.6361}
   m_Pivot: {x: 0.43796316, y: 0.5000001}
 --- !u!114 &669939220
@@ -805,12 +805,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e1155f3de646b74db9df06b3c803c40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TitleTextCycler
-  targetText: {fileID: 669939220}
-  changeInterval: 2
+  titleText: {fileID: 0}
   messages:
   - Discover your next spontaneous adventure.
   - Plan less, explore more with Triply.
   - Are you ready for your vacation ?
+  displayTime: 2
+  fadeTime: 0.5
 --- !u!1 &712033056
 GameObject:
   m_ObjectHideFlags: 0
@@ -2613,8 +2614,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 693.59, y: -213.56}
-  m_SizeDelta: {x: 1064.7, y: 234.91}
+  m_AnchoredPosition: {x: 702.9886, y: -157.35349}
+  m_SizeDelta: {x: 1047.9482, y: 122.4957}
   m_Pivot: {x: 0.43796316, y: 0.5000001}
 --- !u!111 &1670267767
 Animation:
@@ -2679,8 +2680,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 200
-  m_fontSizeBase: 200
+  m_fontSize: 100
+  m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
